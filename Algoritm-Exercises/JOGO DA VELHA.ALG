@@ -1,16 +1,12 @@
-
-//Resolver Bug da Coluna, as vezes não ganha.
 algoritmo "Jogo da Velha"
 var
    MTab: Vetor[1..3,1..3] de inteiro
    JTab: Vetor[1..3,1..3] de caractere
    L,C,J,Cont,AuxMTab: inteiro
    AuxJTab,MsgErro,MSGVenc: caractere
-
-
+   
 Funcao EntradaJogador(Cont:inteiro):inteiro
 Inicio
-
    Se Cont%2=0 entao
       Escreva("Vai jogar [O] em qual posição? ")
       AuxJTab := "  O"
@@ -24,18 +20,17 @@ FimFuncao
 
 Procedimento TesteVencedor()
 Var
-   AuxO,AuxX,ContLX,ContLO,ContCX,ContCO,ContDX,ContDO,ContDX2,ContDO2: inteiro
+   AuxOC,AuxXC,AuxXL,AuxOL,ContLX,ContLO,ContCX,ContCO,ContDX,ContDO,ContDX2,ContDO2: inteiro
 Inicio
-
    ContLX := 0
    ContLO := 0
    ContDX := 0
    ContDO := 0
-
    Para L := 1 ate 3 faca
       ContCX := 0
       ContCO := 0
       Para C:= 1 ate 3 faca
+         //REGRA DA LINHA "X" E "O"
          Se JTab[L,C] = "  X" Entao
             ContCX := ContCX + 1
             Se (ContCX = 3) Entao
@@ -49,32 +44,35 @@ Inicio
                MSGVenc := "Parabéns, você GANHOU!
             FimSe
          FimSe
-
+         //REGRA DA COLUNA "X" E "O"
          Se (JTab[L,C] = "  X") Entao
-            Se (C=AuxX) Entao
+            Se (C = AuxXC) Entao
                ContLX := ContLX + 1
-            SeNao
-               AuxX := C
+               AuxXL := L
+            Fimse
+            Se (C <> AuxXC) e (AuxXL <> L) Entao
                ContLX := 1
+               AuxXC := C
             FimSe
          FimSe
          Se (ContLX = 3) Entao
             MSGVenc := "Parabéns, você GANHOU!
          FimSe
 
-
-         Se JTab[L,C] = "  O" Entao
-            Se (C=AuxO) Entao
+         Se (JTab[L,C] = "  O") Entao
+            Se (C = AuxOC) Entao
                ContLO := ContLO + 1
-            SeNao
-               AuxO := C
+               AuxOL := L
+            Fimse
+            Se (C <> AuxOC) e (AuxOL <> L) Entao
                ContLO := 1
+               AuxOC := C
             FimSe
          FimSe
          Se (ContLO = 3) Entao
             MSGVenc := "Parabéns, você GANHOU!
          FimSe
-
+         //REGRA DA DIAGONAL "X" E "O"
          Se JTab[L,C] = "  X" Entao
             Se (L = C) Entao
                ContDX := ContDX + 1
@@ -90,8 +88,7 @@ Inicio
             FimSe
          FimSe
 
-
-          Se JTab[L,C] = "  O" Entao
+         Se JTab[L,C] = "  O" Entao
             Se (L = C) Entao
                ContDO := ContDO + 1
                Se (ContDO = 3) Entao
@@ -105,16 +102,15 @@ Inicio
                FimSe
             FimSe
          FimSe
-
+      FimPara
    FimPara
-FimPara
 
 FimProcedimento
 
 inicio
 
    Repita
-
+      //SAIDA DO TABULEIRO E JOGADA INVÁLIDA
       EscrevaL("+---+---+---+")
       AuxMTab := 0
       Para L := 1 ate 3 faca
@@ -138,17 +134,15 @@ inicio
          AuxMTab := AuxMTab + C
          EscrevaL("|")
          EscrevaL("+---+---+---+")
-
       FimPara
-
       Cont := Cont + 1
-
+      // MENSAGEM DE ERRO
       Se MsgErro <> "" Entao
          EscrevaL(MsgErro)
       FimSe
-
+      // TESTES DE JOGADAS
       TesteVencedor()
-
+      // ESCOLHA DO JOGADOR OU FIM DA PARTIDA
       Se MSGVenc = "" Entao
          J := EntradaJogador(Cont)
          LimpaTela
