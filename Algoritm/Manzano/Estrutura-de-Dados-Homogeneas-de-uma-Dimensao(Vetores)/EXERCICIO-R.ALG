@@ -1,27 +1,41 @@
 algoritmo "EXERCICIO-R"
 var
-   A,B,C,D: vetor[1..6] de inteiro
-   X: inteiro
+   A: vetor[1..6] de inteiro
+   B: vetor[1..6] de inteiro
+   C: vetor[1..12] de inteiro
+   D: vetor[1..12] de inteiro
+   X,I,P:inteiro
 inicio
-   //ENTRADA DE DADOS DO VETOR 'A' e 'B'
+   //ENTRADA DE DADOS DOS VETORES 'A' E 'B'
+   EscrevaL("MATRIZ A e B: ")
    Para X := 1 ate 6 faca
-      Leia(A[X])
-      Leia(B[X])
+      Leia(A[X],B[X])
    FimPara
-   //ENTRADA DE DADOS DO VETOR 'C' E 'D'
+   //ENTRADA DE DADOS DOS VETORES 'C' E 'D'
    Para X := 1 ate 6 faca
       Se A[X]%2 = 1 entao
-         C[X] := A[X]
-      SeNao
-         D[X] := A[X]
-      FimSe
-      Se (B[X]%2 = 1) e (C[X] = 0) Entao
-         C[X] := B[X]
-      FimSe
-      Se (B[X]%2 = 0) e (C[X] = 0) Entao
-         D[X] := B[X]
+         I := I + 1
+         C[I] := A[X]
+      Senao
+         P := P + 1
+         D[P] := A[X]
+      Fimse
+      Se B[X]%2 = 1 entao
+         I := I + 1
+         C[I] := B[X]
+      Senao
+         P := P + 1
+         D[P] := B[X]
       FimSe
    FimPara
-   //SAÍDA DE DADOS DO VETOR 'C' E 'D'
-
+   //SAÍDA DE DADOS DOS VETORES 'C' E 'D'
+   EscrevaL("MATRIZ C: ")
+   Para X := 1 ate I faca
+        Escreva(C[X])
+   FimPara
+   EscrevaL()
+   EscrevaL("MATRIZ D: ")
+   Para X := 1 ate P faca
+        Escreva(D[X])
+   FimPara
 fimalgoritmo
