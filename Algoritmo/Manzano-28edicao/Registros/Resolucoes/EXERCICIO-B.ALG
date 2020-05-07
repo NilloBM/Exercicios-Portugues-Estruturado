@@ -1,15 +1,15 @@
 algoritmo "EXERCICIO-B"
-Tipo
+
+Tipo//OBS: Visualg não aceita Vetor no registro.
+    //DECLARARIA:
+    //... Em - Tipo -> Registro -> NOTAS_BI: Vetor[1..4] de real
+    //LEITURA, na entrada de dados:
+    //... Para Y := 1 ate 4 faca
+    //         Escreva("Qual a",Y,"a nota do bimestre? ")
+    //         Leia(ALUNO[X].NOTAS_BI[Y])
+    //    FimPara
    DADOS_BI = Registro
       NOME: Caractere
-      //OBS: Visualg não aceita Vetor no registro.
-      //DECLARARIA:
-      //... Em - Tipo -> Registro -> NOTAS_BI: Vetor[1..4] de real
-      //LEITURA, na entrada de dados:
-      //... Para Y := 1 ate 4 faca
-      //         Escreva("Qual a",Y,"a nota do bimestre? ")
-      //         Leia(ALUNO[X].NOTAS_BI[Y])
-      //    FimPara
       NOTA1: Real
       NOTA2: Real
       NOTA3: Real
@@ -17,8 +17,7 @@ Tipo
       MD_BI: Real
       STATUS: Caractere
    FimRegistro
-var
-   //OBS: O COMANDO DO EXERCÍCIO DETERMINOU 20 REGISTROS, PORÉM
+var//OBS: O COMANDO DO EXERCÍCIO DETERMINOU 20 REGISTROS, PORÉM
    //COLOQUEI 3 REGISTROS PARA FACILITAR O TESTE.
    ALUNO: Vetor[1..3] de DADOS_BI
    X,Y,MENU,COMEC,FIM,SAIR: Inteiro
@@ -34,7 +33,7 @@ inicio
       EscrevaL("Digite [4] para SAIR")
       Leia(MENU)
       Escolha MENU
-         //ENTRADA DE DADOS: ALUNO & ORDENAÇÃO CRESCENTE: ALUNO.NOME
+      //ENTRADA DE DADOS: ALUNO & ORDENAÇÃO CRESCENTE: ALUNO.NOME
       CASO 1
          Para X := 1 ate 3 faca
             Escreva("Qual o nome do aluno? ")
@@ -82,7 +81,7 @@ inicio
                FimSe
             FimPara
          FimPara
-         //PESQUISA-BINÁRIA: ALUNO.NOME
+      //PESQUISA-BINÁRIA: ALUNO.NOME
       CASO 2
          RESP := "S"
          Enquanto Maiusc(RESP) = "S" faca
@@ -103,6 +102,7 @@ inicio
                   FimSe
                FimSe
             FimEnquanto
+            //SAÍDA DE DADOS DA PESQUISA: NOME PESQUISADO + MÉDIA + APROVADO/REPROVADO
             Se FLAG = verdadeiro entao
                ALUNO[int(MEIO)].MD_BI := (ALUNO[Int(MEIO)].NOTA1 + ALUNO[Int(MEIO)].NOTA2 + ALUNO[Int(MEIO)].NOTA3 + ALUNO[Int(MEIO)].NOTA4)/4
                Se ALUNO[int(MEIO)].MD_BI >= 5 entao
@@ -122,7 +122,7 @@ inicio
             EscrevaL("Pesquisar novamente? (S/N):")
             Leia(RESP)
          FimEnquanto
-         //SAÍDA DE DADOS
+      //SAÍDA DE DADOS
       CASO 3
          Para X := 1 ate 3 faca
             EscrevaL("NOME: ", ALUNO[X].NOME)
@@ -134,7 +134,7 @@ inicio
             EscrevaL("SITUAÇÃO: ", ALUNO[X].STATUS)
             EscrevaL()
          FimPara
-         //SAIR DO PROGRAMA
+      //SAIR DO PROGRAMA
       OUTROCASO
          SAIR := 4
       FimEscolha
